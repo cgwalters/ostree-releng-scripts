@@ -40,6 +40,6 @@ with tempfile.NamedTemporaryFile() as commitfd:
         subprocess.check_call(['rpm-sign', '--key', args.key, '--detachsign', commitfd.name,
                                '--output', sigfd.name])
         with open(sigfd.name) as sigfd_in:
-            sigdata = GLib.Bytes(sigfd_in.read())
+            sigdata = GLib.Bytes.new(sigfd_in.read())
             r.append_gpg_signature(rev, sigdata, None)
             print("Successfully signed OSTree commit={} with key={}".format(rev, args.key))
